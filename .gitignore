@@ -1,6 +1,6 @@
 .idea/
 .__pycache__/
-.migrations/
+migrations
 .db.sqlite3/
 .static/
 db.sqlite3
