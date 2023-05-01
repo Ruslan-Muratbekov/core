@@ -1,16 +1,15 @@
 from rest_framework.generics import GenericAPIView
 from rest_framework.viewsets import ReadOnlyModelViewSet
-from rest_framework.generics import UpdateAPIView
-from .serializers import RegisterSerializer, UserSerializer, LoginSerializer, EventSerializer
+from rest_framework.generics import UpdateAPIView, DestroyAPIView
+from .serializers import RegisterSerializer, UserSerializer, LoginSerializer, EventSerializer, ThemeSerializer
 from rest_framework import status
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
 from django_filters import rest_framework
-# from rest_framework.permissions import IsAuthenticated
 from .permissions import IsAuthenticated
 
 from user.models import User
-from event.models import Event
+from event.models import Event, ThemeOfEvent
 
 
 class RegisterGenericAPIView(GenericAPIView):
@@ -72,4 +71,19 @@ class EventUpdateModelViewSet(UpdateAPIView):
     filter_backends = (rest_framework.DjangoFilterBackend,)
     filterset_fields = ('id',)
     permission_classes = (IsAuthenticated,)
+    lookup_url_kwarg = 'pk'
+
+
+class EventDestroyAPIView(DestroyAPIView):
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
+    filterset_fields = ('id',)
+    permission_classes = (IsAuthenticated,)
+    lookup_url_kwarg = 'pk'
+
+
+class ThemeReadonlyAPIView(ReadOnlyModelViewSet):
+    queryset = ThemeOfEvent.objects.all()
+    serializer_class = ThemeSerializer
+    filterset_fields = ('id',)
     lookup_url_kwarg = 'pk'

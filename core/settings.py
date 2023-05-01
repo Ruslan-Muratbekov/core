@@ -240,6 +240,8 @@ JAZZMIN_SETTINGS = {
         'authtoken.TokenProxy': 'fas fa-key',
         'event.Event': 'fas fa-calendar',
         'event.FormatEvent': 'fas fa-signal',
+        'event.ThemeOfEvent': 'fas fa-thermometer',
+        'event.City': 'fas fa-city',
     },
     # Значки, которые используются, если они не указаны вручную
     "default_icon_parents": "fas fa-chevron-circle-right",

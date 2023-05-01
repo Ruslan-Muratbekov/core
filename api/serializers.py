@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from event.models import Event
+from event.models import Event, ThemeOfEvent
 from user.models import User
 
 
@@ -38,5 +38,11 @@ class EventSerializer(serializers.ModelSerializer):
             'event_date',
             'event_time',
             'themeOfEvent',
-            'formatEvent'
+            'formatEvent',
         ]
+
+
+class ThemeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ThemeOfEvent
+        fields = '__all__'
