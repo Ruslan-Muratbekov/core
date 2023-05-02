@@ -40,6 +40,19 @@ class City(models.Model):
         ordering = ['id']
 
 
+class SubscribeUser(models.Model):
+    first_name = models.CharField(max_length=258, null=False, blank=False, verbose_name='Имя')
+    last_name = models.CharField(max_length=258, null=False, blank=False, verbose_name='Фамилия')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    event = models.ForeignKey(to='Event', on_delete=models.CASCADE)
+
+
+class EventComments(models.Model):
+    like = models.BooleanField(default=False, null=False, blank=False)
+    comment = models.TextField(max_length=900, null=False, blank=False)
+    user = models.ForeignKey(SubscribeUser.user, on_delete=models.CASCADE)
+
+
 class Event(BaseAbstractModel, models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
     title = models.CharField(max_length=128, null=False, blank=False, verbose_name='Название')
